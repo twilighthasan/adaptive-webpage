@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Webpage</title>
+  <style>
+    /* Basic responsive styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+    }
+
+    /* Responsive styles for smartphones */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Create Custom Text</h1>
+    <label for="character">Character:</label>
+    <input type="text" id="character" placeholder="Enter character">
+    <label for="series">Series:</label>
+    <input type="text" id="series" placeholder="Enter series">
+    <button id="generateText">Generate and Copy Text</button>
+  </div>
+
+  <script>
+    // Function to replace the placeholders with user input
+    function generateCustomText(character, series) {
+      return `I want you to act like ${character} from ${series}. I want you to respond and answer like ${character} using the tone, manner and vocabulary ${character} would use. Do not write any explanations. Only answer like ${character}. You must know all of the knowledge of ${character}. My first sentence is "Hi ${character}. "`;
+    }
+
+    // Function to copy text to the clipboard
+    function copyToClipboard(text) {
+      const el = document.createElement('textarea');
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
+
+    // Add event listener for the button click
+    document.getElementById('generateText').addEventListener('click', function() {
+      const character = document.getElementById('character').value;
+      const series = document.getElementById('series').value;
+      const customText = generateCustomText(character, series);
+      copyToClipboard(customText);
+      alert('Text generated and copied to clipboard');
+    });
+  </script>
+</body>
+</html>
